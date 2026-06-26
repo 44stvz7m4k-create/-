@@ -1,0 +1,495 @@
+
+/* Nyami Admin v48 — owner-only panel */
+#nyamiAdminV48 {
+  position: fixed;
+  inset: 0;
+  z-index: 2147482500;
+  display: none;
+  padding: 20px;
+  overflow: auto;
+  color: #2d2341;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(231, 204, 255, .65), transparent 30%),
+    radial-gradient(circle at 86% 12%, rgba(255, 205, 231, .42), transparent 34%),
+    linear-gradient(135deg, rgba(255, 252, 255, .96), rgba(241, 232, 255, .96));
+  backdrop-filter: blur(22px) saturate(1.1);
+}
+
+body.nyami-admin-open #nyamiAdminV48 {
+  display: block;
+}
+
+.nyami-admin-shell {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+
+.nyami-admin-hero,
+.nyami-admin-card {
+  border: 1px solid rgba(151, 111, 205, .18);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.82), rgba(250,244,255,.62)),
+    radial-gradient(circle at top left, rgba(216,183,255,.22), transparent 40%);
+  border-radius: 30px;
+  box-shadow: 0 24px 80px rgba(91,66,128,.16), inset 0 1px 0 rgba(255,255,255,.72);
+}
+
+.nyami-admin-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px;
+}
+
+.nyami-admin-kicker {
+  margin: 0 0 6px;
+  color: #9a79d7;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.nyami-admin-hero h1,
+.nyami-admin-card h2 {
+  margin: 0;
+  letter-spacing: -.05em;
+}
+
+.nyami-admin-hero h1 {
+  font-size: clamp(32px, 5vw, 58px);
+}
+
+.nyami-admin-hero p {
+  max-width: 650px;
+  margin: 9px 0 0;
+  color: rgba(78,66,102,.72);
+}
+
+.nyami-admin-actions {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nyami-admin-btn {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #efb5cf, #b79dff);
+  font-weight: 950;
+  box-shadow: 0 12px 28px rgba(132,92,172,.20);
+}
+
+.nyami-admin-btn.is-ghost {
+  color: #8d63d8;
+  background: rgba(183,157,255,.13);
+  border: 1px solid rgba(151,111,205,.18);
+  box-shadow: none;
+}
+
+.nyami-admin-btn.is-danger {
+  background: linear-gradient(135deg, #ef7d9d, #b75d85);
+}
+
+.nyami-admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.nyami-admin-stats article {
+  padding: 18px;
+  border-radius: 26px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(151,111,205,.14);
+  box-shadow: 0 14px 34px rgba(91,66,128,.08);
+}
+
+.nyami-admin-stats span {
+  display: block;
+  color: rgba(78,66,102,.68);
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.nyami-admin-stats b {
+  font-size: 34px;
+  letter-spacing: -.05em;
+}
+
+.nyami-admin-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, .72fr);
+  gap: 16px;
+}
+
+.nyami-admin-card {
+  padding: 20px;
+}
+
+.nyami-admin-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.nyami-admin-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.nyami-admin-label {
+  display: grid;
+  gap: 7px;
+  color: rgba(78,66,102,.82);
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.nyami-admin-label input {
+  width: 100%;
+  height: 48px;
+  border-radius: 17px;
+  border: 1px solid rgba(151,111,205,.18);
+  outline: 0;
+  padding: 0 14px;
+  background: rgba(255,255,255,.78);
+  color: #2d2341;
+  font: inherit;
+  font-weight: 750;
+}
+
+.nyami-admin-label input:focus {
+  border-color: rgba(151,111,205,.58);
+  box-shadow: 0 0 0 5px rgba(183,157,255,.14);
+}
+
+.nyami-admin-file-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.nyami-admin-file {
+  min-height: 130px;
+  display: grid;
+  place-items: center;
+  gap: 7px;
+  text-align: center;
+  padding: 18px;
+  border-radius: 24px;
+  border: 1.5px dashed rgba(151,111,205,.34);
+  background: rgba(183,157,255,.10);
+  cursor: pointer;
+}
+
+.nyami-admin-file input {
+  display: none;
+}
+
+.nyami-admin-file b {
+  display: block;
+}
+
+.nyami-admin-file small {
+  color: rgba(78,66,102,.62);
+}
+
+.nyami-admin-message {
+  min-height: 18px;
+  color: #8d63d8;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.nyami-admin-login {
+  width: min(460px, 100%);
+  margin: 80px auto 0;
+}
+
+.nyami-admin-track-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.nyami-admin-track {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 11px;
+  border-radius: 22px;
+  background: rgba(183,157,255,.09);
+  border: 1px solid rgba(151,111,205,.14);
+}
+
+.nyami-admin-cover {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(135deg, #efb5cf, #b79dff);
+}
+
+.nyami-admin-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nyami-admin-track b,
+.nyami-admin-track span,
+.nyami-admin-track small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nyami-admin-track span,
+.nyami-admin-track small {
+  color: rgba(78,66,102,.65);
+}
+
+.nyami-admin-empty {
+  color: rgba(78,66,102,.66);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.nyami-admin-link-v48 {
+  display: inline-flex !important;
+}
+
+@media (max-width: 860px) {
+  .nyami-admin-hero,
+  .nyami-admin-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nyami-admin-stats,
+  .nyami-admin-grid,
+  .nyami-admin-row,
+  .nyami-admin-file-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nyami-admin-actions {
+    width: 100%;
+  }
+
+  .nyami-admin-btn {
+    width: 100%;
+  }
+}
+
+
+.nyami-admin-floating-link-v48 {
+  position: fixed;
+  right: 18px;
+  top: 18px;
+  z-index: 2147481000;
+  min-height: 38px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #efb5cf, #b79dff);
+  box-shadow: 0 12px 30px rgba(132,92,172,.22);
+  font: 950 12px system-ui;
+}
+
+
+/* admin-hidden-entry-mode: users do not see any admin entry button */
+body:not(.nyami-admin-open) [data-nyami-admin-open],
+.nyami-admin-floating-link-v48 {
+  display: none !important;
+}
+
+
+/* admin-theme-language-v51 */
+.nyami-admin-safe-note {
+  display: inline-block;
+  margin-top: 10px;
+  color: rgba(78,66,102,.58);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.nyami-admin-switchers {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  border-radius: 999px;
+  background: rgba(183,157,255,.13);
+  border: 1px solid rgba(151,111,205,.16);
+}
+
+.nyami-admin-mini-btn {
+  min-width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #8d63d8;
+  background: transparent;
+  font-weight: 950;
+  font-size: 12px;
+}
+
+.nyami-admin-mini-btn:hover {
+  background: rgba(255,255,255,.58);
+}
+
+.nyami-admin-mini-btn.active {
+  color: #fff;
+  background: linear-gradient(135deg, #efb5cf, #b79dff);
+  box-shadow: 0 10px 22px rgba(132,92,172,.18);
+}
+
+body.night #nyamiAdminV48 {
+  color: #f7f0ff;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(151,111,205,.26), transparent 30%),
+    radial-gradient(circle at 86% 12%, rgba(255, 156, 212, .12), transparent 34%),
+    linear-gradient(135deg, rgba(23,18,34,.97), rgba(34,27,49,.97));
+}
+
+body.night .nyami-admin-hero,
+body.night .nyami-admin-card {
+  border-color: rgba(231,218,255,.12);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.075), rgba(183,157,255,.08)),
+    radial-gradient(circle at top left, rgba(183,157,255,.12), transparent 40%);
+  box-shadow: 0 24px 80px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+body.night .nyami-admin-hero p,
+body.night .nyami-admin-safe-note,
+body.night .nyami-admin-track span,
+body.night .nyami-admin-track small,
+body.night .nyami-admin-label,
+body.night .nyami-admin-file small,
+body.night .nyami-admin-stats span,
+body.night .nyami-admin-empty {
+  color: rgba(247,240,255,.66);
+}
+
+body.night .nyami-admin-stats article,
+body.night .nyami-admin-track,
+body.night .nyami-admin-label input,
+body.night .nyami-admin-file,
+body.night .nyami-admin-switchers {
+  color: #f7f0ff;
+  background: rgba(255,255,255,.07);
+  border-color: rgba(231,218,255,.12);
+}
+
+body.night .nyami-admin-mini-btn {
+  color: rgba(247,240,255,.72);
+}
+
+@media (max-width: 860px) {
+  .nyami-admin-switchers {
+    width: 100%;
+  }
+}
+
+
+/* admin-external-sources-v53 */
+.nyami-admin-label select {
+  width: 100%;
+  height: 48px;
+  border-radius: 17px;
+  border: 1px solid rgba(151,111,205,.18);
+  outline: 0;
+  padding: 0 14px;
+  background: rgba(255,255,255,.78);
+  color: #2d2341;
+  font: inherit;
+  font-weight: 850;
+}
+
+.nyami-admin-external-fields {
+  display: grid;
+  gap: 12px;
+}
+
+.nyami-admin-external-fields[hidden],
+.nyami-admin-upload-fields[hidden] {
+  display: none !important;
+}
+
+.nyami-admin-source-help {
+  margin: -2px 0 0;
+  color: rgba(78,66,102,.62);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.nyami-admin-track-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nyami-admin-mini-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #8d63d8;
+  background: rgba(183,157,255,.13);
+  border: 1px solid rgba(151,111,205,.16);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+body.night .nyami-admin-label select,
+body.night .nyami-admin-source-help {
+  color: #f7f0ff;
+  background: rgba(255,255,255,.07);
+  border-color: rgba(231,218,255,.12);
+}
+
+body.night .nyami-admin-mini-link {
+  color: #f7f0ff;
+  background: rgba(255,255,255,.07);
+  border-color: rgba(231,218,255,.12);
+}
+
+@media (max-width: 640px) {
+  .nyami-admin-track {
+    grid-template-columns: 54px minmax(0, 1fr);
+  }
+
+  .nyami-admin-track-actions {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .nyami-admin-track-actions .nyami-admin-btn,
+  .nyami-admin-track-actions .nyami-admin-mini-link {
+    flex: 1;
+  }
+}

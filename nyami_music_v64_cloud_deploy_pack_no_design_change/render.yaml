@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: nyami-music
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    healthCheckPath: /api/health
+    envVars:
+      - key: NYAMI_HOST
+        value: 0.0.0.0
+      - key: NYAMI_NO_OPEN
+        value: "1"
+      - key: NYAMI_STORAGE_DIR
+        value: /opt/render/project/src/storage
+      - key: NYAMI_OWNER_LOGIN
+        value: admin
+      - key: NYAMI_OWNER_PASSWORD
+        sync: false
+      - key: JAMENDO_CLIENT_ID
+        sync: false
+      - key: YOUTUBE_API_KEY
+        sync: false
+      - key: SPOTIFY_CLIENT_ID
+        sync: false
+      - key: SPOTIFY_CLIENT_SECRET
+        sync: false
+      - key: SOUNDCLOUD_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: APPLE_CLIENT_ID
+        sync: false
+      - key: APPLE_CLIENT_SECRET
+        sync: false
+    disk:
+      name: nyami-storage
+      mountPath: /opt/render/project/src/storage
+      sizeGB: 1

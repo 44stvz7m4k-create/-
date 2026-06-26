@@ -1,0 +1,52 @@
+
+/* v57 social auth layer.
+   Existing site UI is not changed; these rules apply only to the injected social-auth block. */
+
+.nyami-social-auth-v57 {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 14px;
+}
+
+.nyami-social-divider-v57 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: .76;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.nyami-social-divider-v57::before,
+.nyami-social-divider-v57::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: currentColor;
+  opacity: .16;
+}
+
+.nyami-social-grid-v57 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.nyami-social-btn-v57 {
+  margin: 0 !important;
+  min-height: 44px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.nyami-social-btn-v57 span {
+  font-weight: 950;
+}
+
+@media (max-width: 520px) {
+  .nyami-social-grid-v57 {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,346 @@
+
+/* v61 logo + mobile adaptation layer.
+   Existing design files are not edited. Desktop layout is preserved. */
+
+.brand-home-v61 {
+  cursor: pointer;
+  user-select: none;
+}
+
+.brand-home-v61:focus-visible {
+  outline: 3px solid rgba(201,164,255,.42);
+  outline-offset: 5px;
+  border-radius: 22px;
+}
+
+.brand-logo-v61 {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  border-radius: inherit;
+}
+
+/* Mobile safety */
+@media (max-width: 860px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body.compact-app .layout,
+  .layout {
+    width: 100%;
+    max-width: 100%;
+    gap: 12px;
+  }
+
+  .sidebar.panel,
+  .main,
+  .right.panel,
+  .topbar.panel,
+  .hero.panel,
+  .tracks.panel,
+  .mood-section.panel,
+  .profile-view.panel {
+    max-width: 100%;
+  }
+
+  .brand {
+    align-items: center;
+  }
+
+  .brand-mark {
+    flex: 0 0 auto;
+  }
+
+  .nav-list {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-item {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .search-popover {
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    max-height: min(72vh, 620px);
+    overflow: auto;
+  }
+
+  .top-actions {
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .top-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .profile-chip {
+    flex: 0 0 auto;
+  }
+
+  .hero,
+  .tracks,
+  .mood-section,
+  .profile-view {
+    overflow: hidden;
+  }
+
+  .track-list,
+  .playlist-track-list,
+  .profile-mini-list,
+  .for-you-list-v59 {
+    max-width: 100%;
+  }
+
+  .track-row,
+  .profile-mini-item,
+  .playlist-mini {
+    min-width: 0;
+  }
+
+  .cover-wrap {
+    width: min(100%, 360px);
+    margin-inline: auto;
+  }
+
+  .right {
+    max-height: none !important;
+  }
+
+  .bottom-player {
+    max-width: calc(100vw - 20px);
+  }
+}
+
+/* Phone layout polish */
+@media (max-width: 760px) {
+  body.compact-app .layout,
+  .layout {
+    padding-inline: 10px !important;
+    padding-top: 10px !important;
+    padding-bottom: calc(var(--dock-height, 122px) + 28px) !important;
+  }
+
+  .sidebar {
+    order: 0 !important;
+  }
+
+  .main {
+    order: 1 !important;
+  }
+
+  .right {
+    order: 2 !important;
+  }
+
+  .sidebar.panel {
+    padding: 14px !important;
+    gap: 14px !important;
+  }
+
+  .brand {
+    gap: 11px !important;
+    margin-bottom: 2px;
+  }
+
+  .brand-mark {
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px !important;
+    min-height: 46px !important;
+    font-size: 0 !important;
+  }
+
+  .brand h1 {
+    font-size: 27px !important;
+    letter-spacing: -1px;
+  }
+
+  .brand p {
+    font-size: 11px !important;
+  }
+
+  .nav-list {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+    margin-inline: -2px;
+  }
+
+  .nav-item {
+    width: auto !important;
+    min-height: 42px !important;
+    padding: 0 12px !important;
+    border-radius: 15px !important;
+    transform: none !important;
+  }
+
+  .nav-item:hover,
+  .nav-item.active {
+    transform: none !important;
+  }
+
+  .nav-item .icon {
+    width: auto !important;
+    min-width: 20px;
+  }
+
+  .mini-section {
+    max-height: 168px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .topbar {
+    top: 8px !important;
+    padding: 12px !important;
+    border-radius: 24px !important;
+  }
+
+  .top-actions {
+    gap: 8px !important;
+  }
+
+  .circle-btn,
+  .lang-switch {
+    flex: 0 0 auto;
+  }
+
+  .hero {
+    min-height: clamp(280px, 70vw, 380px) !important;
+    padding: 22px !important;
+  }
+
+  .hero-copy h2 {
+    font-size: clamp(38px, 14vw, 68px) !important;
+  }
+
+  .hero-copy h3 {
+    font-size: clamp(25px, 8vw, 42px) !important;
+  }
+
+  .mood-grid,
+  .soon-grid-v54 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .right.panel {
+    padding: 16px !important;
+    border-radius: 26px !important;
+  }
+
+  .now-meta h2 {
+    font-size: 22px !important;
+  }
+
+  .bottom-player {
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    max-width: calc(100vw - 20px) !important;
+    padding: 10px 12px !important;
+    border-radius: 24px !important;
+  }
+
+  .bottom-song {
+    min-width: 0;
+  }
+
+  .bottom-song img {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 15px !important;
+  }
+
+  .bottom-main {
+    min-width: 0;
+  }
+
+  .profile-dropdown {
+    max-width: calc(100vw - 24px) !important;
+  }
+
+  .modal-card,
+  .profile-modal-card,
+  .admin-edit-card-v59 {
+    width: min(100%, calc(100vw - 24px)) !important;
+    max-height: calc(100vh - 24px) !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 430px) {
+  .layout {
+    padding-inline: 8px !important;
+  }
+
+  .brand h1 {
+    font-size: 24px !important;
+  }
+
+  .brand p {
+    max-width: 190px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-item {
+    padding-inline: 11px !important;
+    font-size: 13px !important;
+  }
+
+  #profileChipName {
+    display: none !important;
+  }
+
+  .profile-chip {
+    padding: 0 5px !important;
+  }
+
+  .hero-actions,
+  .library-toolbar,
+  .playlist-actions,
+  .queue-actions-v60 {
+    flex-wrap: wrap;
+  }
+
+  .track-row {
+    gap: 8px !important;
+  }
+
+  .bottom-player {
+    gap: 7px !important;
+  }
+
+  .mini-controls {
+    gap: 7px !important;
+  }
+
+  .mini-play {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .queue-launcher-v60 {
+    bottom: calc(var(--dock-height, 122px) + 10px) !important;
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "build": "v64-cloud-deploy-pack",
+  "style_css_changed": false,
+  "python_compile": "ok",
+  "node_check": {
+    "app.js": "ok",
+    "auth-v47.js": "ok",
+    "admin-v48.js": "ok",
+    "server-tracks-v48.js": "ok",
+    "universal-search-v54.js": "ok",
+    "social-auth-v57.js": "ok",
+    "server-playlists-v58.js": "ok",
+    "admin-tools-v59.js": "ok",
+    "product-polish-v59.js": "ok",
+    "queue-history-v60.js": "ok",
+    "logo-home-v61.js": "ok",
+    "release-pack-v62.js": "ok",
+    "stable-pack-v63.js": "ok",
+    "sw.js": "ok"
+  },
+  "runtime_smoke": {
+    "server_start": "ok",
+    "health_endpoint": "ok",
+    "health_ok": true,
+    "build": "v64-cloud-deploy-pack",
+    "storageRoot": null,
+    "dataWritable": true,
+    "musicWritable": true,
+    "coversWritable": true,
+    "tableCount": 18
+  },
+  "cloud_files": [
+    "Dockerfile",
+    "docker-compose.yml",
+    ".dockerignore",
+    "render.yaml",
+    "railway.json",
+    "nixpacks.toml",
+    ".env.cloud.example",
+    "render.env.example",
+    "railway.env.example",
+    "DEPLOY_CLOUD_V64.md"
+  ]
+}

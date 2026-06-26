@@ -1,0 +1,273 @@
+
+/* Server tracks block for Nyami v47 */
+.server-tracks-v48 {
+  display: grid;
+  gap: 14px;
+  margin: 18px 0;
+  padding: 16px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(250,244,255,.48));
+  border: 1px solid rgba(151,111,205,.14);
+  box-shadow: 0 16px 44px rgba(91,66,128,.10);
+}
+
+.server-tracks-head-v48 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.server-tracks-head-v48 p {
+  margin: 0 0 4px;
+  color: #9a79d7;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.server-tracks-head-v48 h2 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: -.04em;
+}
+
+.server-tracks-head-v48 button,
+.server-track-play-v48 {
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #efb5cf, #b79dff);
+  font-weight: 950;
+}
+
+.server-tracks-head-v48 button {
+  min-height: 40px;
+  padding: 0 14px;
+}
+
+.server-tracks-list-v48 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.server-track-card-v48 {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 22px;
+  background: rgba(183,157,255,.09);
+  border: 1px solid rgba(151,111,205,.12);
+}
+
+.server-track-cover-v48 {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 0;
+  border-radius: 18px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #efb5cf, #b79dff);
+}
+
+.server-track-cover-v48 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.server-track-card-v48 b,
+.server-track-card-v48 span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.server-track-card-v48 span {
+  color: rgba(78,66,102,.65);
+  font-size: 13px;
+}
+
+.server-track-play-v48 {
+  grid-column: 1 / -1;
+  min-height: 36px;
+}
+
+.server-tracks-empty-v48 {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  color: rgba(78,66,102,.72);
+}
+
+
+/* server-tracks-merged-v51 */
+body.has-server-tracks-v48 #serverTracksV48 {
+  display: none !important;
+}
+
+.track-row img[src^="/uploads/covers/"],
+.track-row img[src*="/uploads/covers/"] {
+  background: linear-gradient(135deg, #efb5cf, #b79dff);
+}
+
+
+/* server-player-native-v52 */
+.track-row.server-track-row-v52 {
+  position: relative;
+}
+
+.track-row.server-track-row-v52 .track-number {
+  color: #9a79d7;
+  font-weight: 950;
+}
+
+.track-row.server-track-row-v52 .track-info small::after {
+  content: " · server";
+  color: #9a79d7;
+  font-weight: 900;
+}
+
+body.night .track-row.server-track-row-v52 .track-info small::after {
+  color: #d8c4ff;
+}
+
+.track-row.server-track-row-v52.active {
+  box-shadow: 0 16px 44px rgba(151, 111, 205, .20);
+}
+
+.track-row.server-track-row-v52 img {
+  background: linear-gradient(135deg, #efb5cf, #b79dff);
+}
+
+body.has-server-tracks-v48 #serverTracksV48 {
+  display: none !important;
+}
+
+
+/* external-sources-v53-css */
+.external-sources-v53 {
+  display: grid;
+  gap: 14px;
+  margin: 18px 0;
+  padding: 16px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(250,244,255,.48));
+  border: 1px solid rgba(151,111,205,.14);
+  box-shadow: 0 16px 44px rgba(91,66,128,.10);
+}
+
+.external-sources-head-v53 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.external-sources-head-v53 p {
+  margin: 0 0 4px;
+  color: #9a79d7;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.external-sources-head-v53 h2 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: -.04em;
+}
+
+.external-sources-grid-v53 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+.external-source-card-v53 {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 24px;
+  background: rgba(183,157,255,.09);
+  border: 1px solid rgba(151,111,205,.12);
+}
+
+.external-source-cover-v53 {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 0;
+  border-radius: 20px;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #efb5cf, #b79dff);
+  font-weight: 950;
+}
+
+.external-source-cover-v53 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.external-source-body-v53 b,
+.external-source-body-v53 span,
+.external-source-body-v53 small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.external-source-body-v53 span,
+.external-source-body-v53 small {
+  color: rgba(78,66,102,.66);
+}
+
+.external-source-open-v53 {
+  grid-column: 1 / -1;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, #efb5cf, #b79dff);
+  text-decoration: none;
+  font-weight: 950;
+}
+
+.track-row.direct-track-row-v53 .track-number {
+  color: #71a0ff;
+}
+
+body.night .external-sources-v53 {
+  background: linear-gradient(135deg, rgba(255,255,255,.075), rgba(183,157,255,.08));
+  border-color: rgba(231,218,255,.12);
+  box-shadow: 0 24px 80px rgba(0,0,0,.22);
+}
+
+body.night .external-source-card-v53 {
+  background: rgba(255,255,255,.07);
+  border-color: rgba(231,218,255,.12);
+}
+
+body.night .external-source-body-v53 span,
+body.night .external-source-body-v53 small {
+  color: rgba(247,240,255,.66);
+}

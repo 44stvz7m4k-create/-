@@ -1,0 +1,42 @@
+
+/* v63 stable pack layer.
+   No edits to main design file. */
+
+.runtime-report-modal-v63 {
+  position: fixed;
+  inset: 0;
+  z-index: 2147482600;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(22, 18, 35, .32);
+  backdrop-filter: blur(18px);
+}
+
+.runtime-report-modal-v63[hidden] {
+  display: none;
+}
+
+.runtime-report-card-v63 {
+  width: min(760px, 100%);
+  max-height: min(720px, calc(100vh - 36px));
+  overflow: hidden;
+  display: grid;
+  gap: 12px;
+}
+
+.runtime-report-card-v63 pre {
+  margin: 0;
+  max-height: 560px;
+  overflow: auto;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.42);
+  white-space: pre-wrap;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+body.night .runtime-report-card-v63 pre {
+  background: rgba(255,255,255,.07);
+}

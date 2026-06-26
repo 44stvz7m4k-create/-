@@ -1,0 +1,506 @@
+
+/* ==========================================================
+   Nyami v47 auth — isolated, active, high-priority layer.
+   Старі auth-екрани фізично ховаються, новий шар завжди клікабельний.
+   ========================================================== */
+
+#authScreen,
+#authV46Screen,
+.auth-screen,
+.auth-v46-screen {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.nyami-v47-locked .layout,
+body.nyami-v47-upgrade .layout {
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+#nyamiAuthV47 {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+
+  display: none;
+  place-items: center !important;
+  padding: 22px !important;
+
+  pointer-events: auto !important;
+  user-select: auto !important;
+
+  background:
+    radial-gradient(circle at 16% 12%, rgba(224, 194, 255, .48), transparent 32%),
+    radial-gradient(circle at 84% 88%, rgba(255, 199, 226, .38), transparent 34%),
+    linear-gradient(135deg, rgba(252, 248, 255, .94), rgba(238, 229, 255, .92)) !important;
+
+  backdrop-filter: blur(24px) saturate(1.14) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.14) !important;
+}
+
+body.night #nyamiAuthV47 {
+  background:
+    radial-gradient(circle at 16% 12%, rgba(171, 124, 230, .32), transparent 32%),
+    radial-gradient(circle at 84% 88%, rgba(239, 181, 207, .22), transparent 34%),
+    linear-gradient(135deg, rgba(20, 14, 31, .92), rgba(42, 34, 58, .92)) !important;
+}
+
+body.nyami-v47-locked #nyamiAuthV47,
+body.nyami-v47-upgrade #nyamiAuthV47 {
+  display: grid !important;
+}
+
+.nyami-auth-card-v47 {
+  width: min(492px, calc(100vw - 28px)) !important;
+  max-height: min(760px, calc(100dvh - 28px)) !important;
+  overflow-y: auto !important;
+
+  position: relative !important;
+  z-index: 2147483001 !important;
+  pointer-events: auto !important;
+
+  padding: 24px !important;
+  border-radius: 34px !important;
+
+  color: #271d39 !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.82), rgba(250,244,255,.58)),
+    radial-gradient(circle at 18% 0%, rgba(216,183,255,.35), transparent 42%) !important;
+  border: 1px solid rgba(161, 123, 210, .24) !important;
+  box-shadow:
+    0 34px 90px rgba(91, 66, 128, .24),
+    inset 0 1px 0 rgba(255,255,255,.72) !important;
+}
+
+body.night .nyami-auth-card-v47 {
+  color: rgba(255,250,255,.96) !important;
+  background:
+    linear-gradient(135deg, rgba(55,45,74,.94), rgba(38,30,54,.90)),
+    radial-gradient(circle at 18% 0%, rgba(216,183,255,.22), transparent 42%) !important;
+  border-color: rgba(216,199,246,.23) !important;
+  box-shadow:
+    0 34px 100px rgba(7, 5, 14, .50),
+    inset 0 1px 0 rgba(255,255,255,.14) !important;
+}
+
+.nyami-auth-head-v47 {
+  display: grid !important;
+  grid-template-columns: 58px minmax(0, 1fr) !important;
+  gap: 14px !important;
+  align-items: center !important;
+}
+
+.nyami-auth-logo-v47 {
+  width: 58px !important;
+  height: 58px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 21px !important;
+  color: white !important;
+  font-size: 25px !important;
+  font-weight: 950 !important;
+  background:
+    radial-gradient(circle at 34% 26%, rgba(255,255,255,.36), transparent 42%),
+    linear-gradient(135deg, #f0b7db, #b79dff) !important;
+  box-shadow:
+    0 16px 34px rgba(132, 92, 172, .25),
+    inset 0 1px 0 rgba(255,255,255,.30) !important;
+}
+
+.nyami-auth-kicker-v47 {
+  margin: 0 0 6px !important;
+  color: #9a79d7 !important;
+  font-size: 10px !important;
+  font-weight: 950 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+}
+
+.nyami-auth-title-v47 {
+  margin: 0 !important;
+  color: inherit !important;
+  font-size: 26px !important;
+  line-height: 1.04 !important;
+  letter-spacing: -.045em !important;
+}
+
+.nyami-auth-desc-v47 {
+  margin: 14px 0 0 !important;
+  color: rgba(78, 66, 102, .84) !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+}
+
+body.night .nyami-auth-desc-v47 {
+  color: rgba(233,224,247,.70) !important;
+}
+
+.nyami-auth-tabs-v47,
+.nyami-auth-methods-v47 {
+  display: grid !important;
+  gap: 7px !important;
+}
+
+.nyami-auth-tabs-v47 {
+  grid-template-columns: 1fr 1fr !important;
+  margin-top: 18px !important;
+  padding: 5px !important;
+  border-radius: 999px !important;
+  background: rgba(183, 157, 255, .13) !important;
+  border: 1px solid rgba(161, 123, 210, .13) !important;
+}
+
+.nyami-auth-methods-v47 {
+  grid-template-columns: repeat(3, 1fr) !important;
+  margin-top: 11px !important;
+}
+
+.nyami-auth-tabs-v47 button,
+.nyami-auth-methods-v47 button,
+.nyami-auth-submit-v47,
+.nyami-auth-guest-v47 {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border: 0 !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  font-family: inherit !important;
+  transition:
+    transform .16s cubic-bezier(.16, 1, .3, 1),
+    box-shadow .16s ease,
+    background .16s ease,
+    border-color .16s ease,
+    color .16s ease,
+    opacity .16s ease !important;
+}
+
+.nyami-auth-tabs-v47 button {
+  height: 38px !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: rgba(96, 78, 124, .78) !important;
+  font-size: 12px !important;
+  font-weight: 950 !important;
+}
+
+.nyami-auth-methods-v47 button {
+  height: 36px !important;
+  border-radius: 999px !important;
+  background: rgba(183, 157, 255, .12) !important;
+  border: 1px solid rgba(161, 123, 210, .14) !important;
+  color: rgba(96, 78, 124, .78) !important;
+  font-size: 11px !important;
+  font-weight: 950 !important;
+}
+
+body.night .nyami-auth-tabs-v47 button,
+body.night .nyami-auth-methods-v47 button {
+  color: rgba(233,224,247,.72) !important;
+}
+
+.nyami-auth-tabs-v47 button:hover,
+.nyami-auth-methods-v47 button:hover,
+.nyami-auth-submit-v47:hover,
+.nyami-auth-guest-v47:hover {
+  transform: translateY(-1px) !important;
+}
+
+.nyami-auth-tabs-v47 button.is-active,
+.nyami-auth-methods-v47 button.is-active {
+  color: rgba(255,250,255,.98) !important;
+  background: linear-gradient(135deg, #efb5cf, #b79dff) !important;
+  box-shadow:
+    0 12px 26px rgba(132,92,172,.20),
+    inset 0 1px 0 rgba(255,255,255,.28) !important;
+}
+
+.nyami-auth-form-v47 {
+  display: grid !important;
+  gap: 12px !important;
+  margin-top: 17px !important;
+  pointer-events: auto !important;
+}
+
+.nyami-field-v47 {
+  display: grid !important;
+  gap: 7px !important;
+}
+
+.nyami-field-v47.is-hidden {
+  display: none !important;
+}
+
+.nyami-field-v47 label {
+  color: rgba(78, 66, 102, .86) !important;
+  font-size: 11px !important;
+  font-weight: 950 !important;
+}
+
+body.night .nyami-field-v47 label {
+  color: rgba(233,224,247,.72) !important;
+}
+
+.nyami-field-v47 input {
+  width: 100% !important;
+  min-height: 48px !important;
+  height: 48px !important;
+  display: block !important;
+
+  padding: 0 14px !important;
+  border-radius: 17px !important;
+
+  color: #271d39 !important;
+  caret-color: #8d63d8 !important;
+  background: rgba(255,255,255,.82) !important;
+  border: 1px solid rgba(161, 123, 210, .19) !important;
+  outline: none !important;
+
+  font: inherit !important;
+  font-size: 14px !important;
+  font-weight: 750 !important;
+
+  pointer-events: auto !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  transition:
+    border-color .16s ease,
+    background .16s ease,
+    box-shadow .16s ease,
+    transform .16s ease !important;
+}
+
+body.night .nyami-field-v47 input {
+  color: rgba(255,250,255,.96) !important;
+  background: rgba(255,255,255,.075) !important;
+  border-color: rgba(216,199,246,.15) !important;
+}
+
+.nyami-field-v47 input::placeholder {
+  color: rgba(110, 94, 140, .46) !important;
+}
+
+body.night .nyami-field-v47 input::placeholder {
+  color: rgba(233,224,247,.34) !important;
+}
+
+.nyami-field-v47 input:hover {
+  border-color: rgba(151, 111, 205, .36) !important;
+  background: rgba(255,255,255,.94) !important;
+}
+
+body.night .nyami-field-v47 input:hover {
+  background: rgba(255,255,255,.105) !important;
+}
+
+.nyami-field-v47 input:focus,
+.nyami-field-v47 input:focus-visible {
+  border-color: rgba(151, 111, 205, .62) !important;
+  box-shadow:
+    0 0 0 5px rgba(183,157,255,.14),
+    0 10px 26px rgba(132,92,172,.10) !important;
+}
+
+.nyami-field-v47.has-error input {
+  border-color: rgba(223, 78, 121, .62) !important;
+  box-shadow: 0 0 0 5px rgba(223,78,121,.10) !important;
+}
+
+.nyami-field-error-v47 {
+  min-height: 16px !important;
+  color: #df4e79 !important;
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+  font-weight: 850 !important;
+}
+
+.nyami-auth-summary-v47 {
+  display: none !important;
+  margin-top: 12px !important;
+  padding: 10px 12px !important;
+  border-radius: 16px !important;
+  color: #df4e79 !important;
+  font-size: 12px !important;
+  font-weight: 850 !important;
+  background: rgba(223,78,121,.08) !important;
+  border: 1px solid rgba(223,78,121,.16) !important;
+}
+
+.nyami-auth-summary-v47:not(:empty) {
+  display: block !important;
+}
+
+.nyami-auth-submit-v47,
+.nyami-auth-guest-v47 {
+  width: 100% !important;
+  min-height: 48px !important;
+  border-radius: 999px !important;
+  font-size: 13px !important;
+  font-weight: 950 !important;
+}
+
+.nyami-auth-submit-v47 {
+  margin-top: 4px !important;
+  color: rgba(255,250,255,.98) !important;
+  background: linear-gradient(135deg, #efb5cf, #b79dff) !important;
+  box-shadow:
+    0 15px 34px rgba(132,92,172,.22),
+    inset 0 1px 0 rgba(255,255,255,.28) !important;
+}
+
+.nyami-auth-submit-v47.is-loading {
+  opacity: .72 !important;
+  pointer-events: none !important;
+}
+
+.nyami-auth-guest-v47 {
+  margin-top: 10px !important;
+  color: #8d63d8 !important;
+  background: rgba(183,157,255,.12) !important;
+  border: 1px solid rgba(161, 123, 210, .16) !important;
+}
+
+body.night .nyami-auth-guest-v47 {
+  color: rgba(233,224,247,.86) !important;
+  background: rgba(255,255,255,.07) !important;
+}
+
+.nyami-auth-limit-v47 {
+  margin: 10px 0 0 !important;
+  color: rgba(78, 66, 102, .68) !important;
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+  text-align: center !important;
+}
+
+body.night .nyami-auth-limit-v47 {
+  color: rgba(233,224,247,.55) !important;
+}
+
+.nyami-auth-checks-v47 {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  margin-top: 12px !important;
+}
+
+.nyami-auth-checks-v47 span {
+  padding: 6px 9px !important;
+  border-radius: 999px !important;
+  color: rgba(78, 66, 102, .66) !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  background: rgba(183,157,255,.10) !important;
+  border: 1px solid rgba(161, 123, 210, .12) !important;
+}
+
+body.night .nyami-auth-checks-v47 span {
+  color: rgba(233,224,247,.55) !important;
+  background: rgba(255,255,255,.06) !important;
+}
+
+body.nyami-guest-v47::after {
+  content: "Guest mode";
+  position: fixed !important;
+  right: 18px !important;
+  bottom: calc(var(--dock-height, 84px) + 24px) !important;
+  z-index: 2147482000 !important;
+  padding: 8px 12px !important;
+  border-radius: 999px !important;
+  color: rgba(255,250,255,.98) !important;
+  font-size: 11px !important;
+  font-weight: 950 !important;
+  background: linear-gradient(135deg, rgba(239,181,207,.88), rgba(183,157,255,.82)) !important;
+  box-shadow:
+    0 14px 34px rgba(132,92,172,.20),
+    inset 0 1px 0 rgba(255,255,255,.22) !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 520px) {
+  #nyamiAuthV47 {
+    padding: 14px !important;
+  }
+
+  .nyami-auth-card-v47 {
+    padding: 18px !important;
+    border-radius: 28px !important;
+  }
+
+  .nyami-auth-title-v47 {
+    font-size: 22px !important;
+  }
+}
+
+
+/* auth-separated-final-v50 */
+body.nyami-public-guest-v49 [data-profile-menu-action="logout"],
+body.nyami-public-guest-v49 [data-settings-action="logout"] {
+  display: none !important;
+}
+
+.nyami-public-auth-buttons-v49 {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px;
+  border-radius: 999px;
+  background: rgba(183,157,255,.12);
+  border: 1px solid rgba(151,111,205,.16);
+}
+
+.nyami-public-auth-buttons-v49[hidden] {
+  display: none !important;
+}
+
+.nyami-public-auth-buttons-v49 button,
+.nyami-profile-auth-menu-v49 button {
+  border: 0;
+  cursor: pointer;
+  font-weight: 950;
+}
+
+.nyami-public-auth-buttons-v49 button {
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #8d63d8;
+  background: rgba(255,255,255,.62);
+}
+
+.nyami-public-auth-buttons-v49 button:last-child {
+  color: #fff;
+  background: linear-gradient(135deg, #efb5cf, #b79dff);
+  box-shadow: 0 10px 24px rgba(132,92,172,.18);
+}
+
+.nyami-profile-auth-menu-v49[hidden] {
+  display: none !important;
+}
+
+.nyami-profile-auth-menu-v49 button {
+  width: 100%;
+}
+
+body.nyami-admin-open #nyamiAuthV47,
+body.nyami-admin-open .nyami-public-auth-buttons-v49 {
+  display: none !important;
+}
+
+@media (max-width: 780px) {
+  .nyami-public-auth-buttons-v49 {
+    order: 10;
+  }
+
+  .nyami-public-auth-buttons-v49 button {
+    padding: 0 10px;
+    font-size: 11px;
+  }
+}

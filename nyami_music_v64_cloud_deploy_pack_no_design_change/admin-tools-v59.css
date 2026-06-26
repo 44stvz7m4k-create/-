@@ -1,0 +1,50 @@
+
+/* v59 admin tools layer. Main site design is not changed. */
+
+.admin-edit-modal-v59 {
+  position: fixed;
+  inset: 0;
+  z-index: 2147482100;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(22, 18, 35, .38);
+  backdrop-filter: blur(12px);
+}
+
+.admin-edit-modal-v59[aria-hidden="true"] {
+  display: none;
+}
+
+.admin-edit-card-v59 {
+  width: min(720px, 100%);
+  max-height: min(760px, calc(100vh - 36px));
+  overflow: auto;
+}
+
+.admin-edit-head-v59,
+.admin-tools-actions-v59 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.admin-data-tools-v59 textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 140px;
+  border-radius: 18px;
+  border: 1px solid rgba(151,111,205,.18);
+  padding: 12px;
+  background: rgba(255,255,255,.72);
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+}
+
+body.night .admin-data-tools-v59 textarea {
+  background: rgba(255,255,255,.07);
+  border-color: rgba(231,218,255,.12);
+  color: #f7f0ff;
+}

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nyami Music</title>
+  <link rel="stylesheet" href="style.css?v=47" />
+  <link rel="stylesheet" href="auth-v47.css?v=47" />
+  <link rel="stylesheet" href="admin-v48.css?v=48-admin">
+  <link rel="stylesheet" href="server-tracks-v48.css?v=48-admin">
+  <link rel="stylesheet" href="universal-search-v54.css?v=54">
+  <link rel="stylesheet" href="server-playlists-v58.css?v=58">
+  <link rel="stylesheet" href="admin-tools-v59.css?v=59">
+  <link rel="stylesheet" href="product-polish-v59.css?v=59">
+  <link rel="stylesheet" href="queue-history-v60.css?v=60">
+  <link rel="stylesheet" href="mobile-logo-v61.css?v=61">
+  <link rel="stylesheet" href="release-pack-v62.css?v=62">
+  <link rel="stylesheet" href="stable-pack-v63.css?v=63">
+  <link rel="manifest" href="manifest.webmanifest">
+</head>
+<body class="compact-app no-right-player">
+  <div class="noise"></div>
+
+  <div class="layout">
+    <!-- Ліва бічна панель -->
+    <aside class="sidebar panel">
+      <div class="brand">
+        <div class="brand-mark"><img src="assets/logo/nyami-logo-v61.svg" alt="Nyami logo" class="brand-logo-v61"></div>
+        <div>
+          <h1>Nyami</h1>
+          <p data-i18n="brand.subtitle">мʼяка музична кімната</p>
+        </div>
+      </div>
+
+      <nav class="nav-list" data-i18n-aria-label="nav.aria">
+        <button class="nav-item active" data-view="home">
+          <span class="icon">⌂</span>
+          <span data-i18n="nav.home">Головна</span>
+        </button>
+        <button class="nav-item" data-view="search">
+          <span class="icon">⌕</span>
+          <span data-i18n="nav.search">Пошук</span>
+        </button>
+        <button class="nav-item" data-view="library">
+          <span class="icon">♫</span>
+          <span data-i18n="nav.library">Моя музика</span>
+        </button>
+        <button class="nav-item" data-view="radio">
+          <span class="icon">✧</span>
+          <span data-i18n="nav.radio">Радіо вайби</span>
+        </button>
+        <button class="nav-item" data-view="liked">
+          <span class="icon">♡</span>
+          <span data-i18n="nav.liked">Улюблене</span>
+        </button>
+      </nav>
+
+      <!-- Блок з плейлистами у сайдбарі -->
+      <section class="mini-section">
+        <div class="section-head playlist-section-head">
+          <span data-i18n="sidebar.playlists">Плейлисти</span>
+        </div>
+
+        <div class="playlist-mini-list" id="playlistMiniList">
+          <button class="playlist-mini" data-filter="night" data-title-key="playlist.night.title">
+            <img src="assets/covers/playlist1.jpg" alt="">
+            <span>
+              <b data-i18n="playlist.night.title">夜のメロディー</b>
+              <small data-i18n="playlist.night.desc">нічний вайб</small>
+            </span>
+          </button>
+
+          <button class="playlist-mini" data-filter="alt" data-title-key="playlist.alt.title">
+            <img src="assets/covers/playlist2.jpg" alt="">
+            <span>
+              <b data-i18n="playlist.alt.title">alt cotton</b>
+              <small data-i18n="playlist.alt.desc">альт настрій</small>
+            </span>
+          </button>
+
+          <button class="playlist-mini" data-filter="sleep" data-title-key="playlist.sleep.title">
+            <img src="assets/covers/playlist3.jpg" alt="">
+            <span>
+              <b data-i18n="playlist.sleep.title">сонний плед</b>
+              <small data-i18n="playlist.sleep.desc">мʼякий сон</small>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Окрема чиста картка для створення плейлиста -->
+      <div class="create-card clean-create-card">
+        <span class="create-chip" data-i18n="buttons.createPlaylist">Створити плейлист</span>
+        <h3 data-i18n="create.title">Створи свій куточок</h3>
+        <p data-i18n="create.desc">Збери плейлист під настрій.</p>
+        <button id="openCreateBtn" data-i18n="create.button">Створити</button>
+      </div>
+
+      <div class="side-footer">
+        <button id="sideProfileBtn" data-i18n-title="buttons.profile">☻</button>
+        <button data-i18n-title="buttons.settings">⚙</button>
+        <button id="sideThemeBtn" data-i18n-title="buttons.nightTheme">☾</button>
+      </div>
+    </aside>
+
+    <!-- Основна центральна частина -->
+    <main class="main">
+      <header class="topbar panel">
+        <div class="search" id="searchBox">
+          <span class="search-icon">⌕</span>
+          <input id="searchInput" type="search" data-i18n-placeholder="search.placeholder" autocomplete="off" />
+          <button class="clear-search" id="clearSearchBtn" type="button" aria-label="Clear search">×</button>
+        </div>
+
+        <div class="search-popover" id="searchPopover" hidden>
+          <div class="search-popover-head">
+            <div>
+              <span class="pill ghost" data-i18n="search.popoverPill">живий пошук</span>
+              <h3 data-i18n="search.popoverTitle">Швидкий пошук</h3>
+            </div>
+            <button class="popover-close" id="closeSearchPopover" type="button" data-i18n-title="search.close">×</button>
+          </div>
+
+          <div class="popular-searches" aria-label="Quick search tags">
+            <button type="button" data-search-term="alt" data-i18n="search.chipAlt">альт</button>
+            <button type="button" data-search-term="sleep" data-i18n="search.chipSleep">сон</button>
+            <button type="button" data-search-term="night" data-i18n="search.chipNight">ніч</button>
+            <button type="button" data-search-term="dream" data-i18n="search.chipDream">мрії</button>
+          </div>
+
+          <div class="popover-section">
+            <div class="popover-label" data-i18n="search.liveResults">Результати</div>
+            <div class="popover-list" id="searchResultList"></div>
+          </div>
+
+          <div class="popover-section" id="searchHistoryBlock">
+            <div class="popover-label-row">
+              <span class="popover-label" data-i18n="search.history">Історія</span>
+              <button type="button" id="clearHistoryBtn" data-i18n="search.clearHistory">Очистити</button>
+            </div>
+            <div class="history-list" id="searchHistoryList"></div>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <button class="circle-btn" id="shuffleTopBtn" data-i18n-title="buttons.random">⤨</button>
+          <button class="circle-btn" id="themeBtn" data-i18n-title="buttons.changeTheme">☾</button>
+
+          <div class="lang-switch" aria-label="Language switcher">
+            <button class="lang-btn active" data-lang="uk" type="button">UA</button>
+            <button class="lang-btn" data-lang="en" type="button">EN</button>
+          </div>
+
+          <button class="profile-chip" id="profileOpenBtn" data-view="profile" type="button" aria-haspopup="menu" aria-expanded="false">
+            <span class="profile-avatar avatar-mini avatar-mini" id="profileChipAvatar">猫</span>
+            <span id="profileChipName" data-i18n="profile.name">Денис</span>
+          </button>
+
+          <!-- Випадаюче меню профілю -->
+          <div class="profile-dropdown panel" id="profileDropdown" role="menu" aria-hidden="true">
+            <div class="profile-dropdown-head">
+              <span class="profile-dropdown-avatar" id="profileDropdownAvatar">猫</span>
+              <div class="profile-dropdown-user">
+                <b id="profileDropdownName">Денис</b>
+                <small id="profileDropdownHandle">@nyami</small>
+              </div>
+            </div>
+
+            <div class="profile-dropdown-line"></div>
+
+            <button type="button" role="menuitem" data-profile-menu-action="profile">
+              <span>☻</span>
+              <b data-i18n="profileMenu.profile">Профіль</b>
+            </button>
+            <button type="button" role="menuitem" data-profile-menu-action="edit">
+              <span>✎</span>
+              <b data-i18n="profileMenu.edit">Редагувати</b>
+            </button>
+            <button type="button" role="menuitem" data-profile-menu-action="library">
+              <span>♡</span>
+              <b data-i18n="profileMenu.library">Бібліотека</b>
+            </button>
+            <button type="button" role="menuitem" data-profile-menu-action="settings">
+              <span>⚙</span>
+              <b data-i18n="profileMenu.settings">Налаштування</b>
+            </button>
+
+            <div class="profile-dropdown-line"></div>
+
+            <button type="button" role="menuitem" data-profile-menu-action="theme">
+              <span>☾</span>
+              <b data-i18n="profileMenu.theme">Змінити тему</b>
+            </button>
+            <button type="button" role="menuitem" data-profile-menu-action="language">
+              <span>UA</span>
+              <b data-i18n="profileMenu.language">Змінити мову</b>
+            </button>
+
+            <div class="profile-dropdown-line"></div>
+
+            <button class="danger" type="button" role="menuitem" data-profile-menu-action="logout">
+              <span>↩</span>
+              <b data-i18n="profileMenu.logout">Вийти</b>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero panel">
+        <div class="hero-copy">
+          <span class="pill" data-i18n="hero.pill">плейлист дня ♡</span>
+          <h2>月明かりの下で</h2>
+          <h3 data-i18n="hero.title">Місячне світло</h3>
+          <p data-i18n="hero.desc">Мʼякі треки для нічних думок, спокійного коду і затишної сіро‑фіолетової атмосфери.</p>
+          <div class="hero-actions">
+            <button class="primary-btn" id="heroPlayBtn">▶</button>
+            <button class="soft-btn" id="heroLikeBtn" data-i18n-title="buttons.like">♡</button>
+            <button class="soft-btn" id="randomBtn" data-i18n-title="buttons.random">✦</button>
+          </div>
+        </div>
+        <div class="floating-note" data-i18n="hero.floating">neko mode</div>
+      </section>
+
+      <!-- Секція вибору настрою / атмосфери -->
+      <section class="mood-grid" data-i18n-aria-label="moods.aria">
+        <button class="mood-card panel active" data-filter="all" data-title-key="mood.all.title">
+          <span>✦</span>
+          <b data-i18n="mood.all.title">Для тебе</b>
+          <small data-i18n="mood.all.desc">усе мʼяке</small>
+        </button>
+        <button class="mood-card panel" data-filter="new" data-title-key="mood.new.title">
+          <span>🎧</span>
+          <b data-i18n="mood.new.title">Нові релізи</b>
+          <small data-i18n="mood.new.desc">свіжий вайб</small>
+        </button>
+        <button class="mood-card panel" data-filter="alt" data-title-key="mood.alt.title">
+          <span>♡</span>
+          <b data-i18n="mood.alt.title">Альт вайб</b>
+          <small data-i18n="mood.alt.desc">ніжно і дивно</small>
+        </button>
+        <button class="mood-card panel" data-filter="sleep" data-title-key="mood.sleep.title">
+          <span>☁</span>
+          <b data-i18n="mood.sleep.title">Чіл і сон</b>
+          <small data-i18n="mood.sleep.desc">тихіше, мʼякше</small>
+        </button>
+      </section>
+
+      <section class="tracks panel">
+        <div class="panel-title">
+          <div>
+            <h2 id="tracksTitle">Нещодавно слухали ♡</h2>
+            <p id="tracksSubtitle">Обери трек і перевір плеєр</p>
+          </div>
+          <button id="showAllBtn" data-i18n="buttons.all">Усе</button>
+        </div>
+
+        <div class="search-assistant" id="searchAssistant" hidden>
+          <div>
+            <span class="pill ghost" data-i18n="search.assistantPill">розумний пошук</span>
+            <h3 data-i18n="search.assistantTitle">Шукай не тільки назву</h3>
+            <p data-i18n="search.assistantDesc">Вводь виконавця, вайб або натисни готовий тег.</p>
+          </div>
+          <div class="search-chips">
+            <button type="button" data-search-term="alt" data-i18n="search.chipAlt">alt</button>
+            <button type="button" data-search-term="sleep" data-i18n="search.chipSleep">сон</button>
+            <button type="button" data-search-term="night" data-i18n="search.chipNight">ніч</button>
+            <button type="button" data-search-term="dream" data-i18n="search.chipDream">мрії</button>
+          </div>
+        </div>
+
+        <div class="playlist-detail" id="playlistDetail" hidden>
+          <div class="playlist-detail-art">
+            <img id="playlistDetailCover" src="assets/covers/playlist1.jpg" alt="">
+          </div>
+
+          <div class="playlist-detail-copy">
+            <span class="pill ghost" id="playlistDetailTag">playlist</span>
+            <h2 id="playlistDetailTitle">夜のメロディー</h2>
+            <p id="playlistDetailDesc">нічний вайб</p>
+
+            <div class="playlist-detail-meta">
+              <span id="playlistDetailCount">0 tracks</span>
+              <span>•</span>
+              <span id="playlistDetailMood">soft vibe</span>
+            </div>
+
+            <div class="playlist-detail-actions">
+              <button class="primary-btn" id="playlistPlayBtn" type="button" data-i18n="buttons.playPlaylist">▶ Слухати плейлист</button>
+              <button class="soft-action" id="playlistBackBtn" type="button" data-i18n="buttons.backLibrary">← До бібліотеки</button>
+              <button class="danger-action" id="playlistDeleteBtn" type="button" data-i18n="buttons.deletePlaylist" hidden>Видалити</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="track-header" id="trackHeader">
+          <span>#</span>
+          <span data-i18n="tracks.header.track">Трек</span>
+          <span data-i18n="tracks.header.artist">Виконавець</span>
+          <span data-i18n="tracks.header.vibe">Вайб</span>
+          <span data-i18n="tracks.header.time">Час</span>
+          <span></span>
+        </div>
+
+        <div class="track-list" id="trackList"></div>
+      </section>
+    </main>
+
+    <!-- Права панель з поточним треком -->
+    <aside class="right panel" id="rightPlayerPanel">
+      <div class="right-top">
+        <span class="pill ghost" data-i18n="right.nowPlaying">зараз грає</span>
+        <div class="right-player-actions">
+          <button class="circle-btn" id="rightLikeBtn" data-i18n-title="buttons.like">♡</button>
+          <button class="circle-btn player-close-btn" id="closeRightPlayerBtn" type="button" data-i18n-title="player.close">✕</button>
+        </div>
+      </div>
+
+      <div class="cover-wrap">
+        <img id="nowCover" src="assets/covers/cover1.jpg" data-i18n-alt="right.coverAlt">
+      </div>
+
+      <div class="now-meta">
+        <h2 id="nowTitle">ねむれない夜に</h2>
+        <p id="nowArtist">yume</p>
+      </div>
+
+      <div class="progress-area">
+        <input id="nowProgress" class="pro-range progress-range" type="range" min="0" max="100" value="0" />
+        <div class="time-row">
+          <span id="currentTime">0:00</span>
+          <span id="durationTime">0:00</span>
+        </div>
+      </div>
+
+      <div class="big-controls">
+        <button id="repeatBtn" data-i18n-title="buttons.repeat">↻</button>
+        <button id="prevBtn" data-i18n-title="buttons.prev">⏮</button>
+        <button id="playBtn" class="big-play" data-i18n-title="buttons.play">▶</button>
+        <button id="nextBtn" data-i18n-title="buttons.next">⏭</button>
+        <button id="shuffleBtn" data-i18n-title="buttons.shuffle">⤨</button>
+      </div>
+
+      <div class="visual-card">
+        <img src="assets/covers/nowplaying.jpg" alt="">
+        <div>
+          <b data-i18n="right.modeTitle">Комфортний режим</b>
+          <p data-i18n="right.modeDesc">Без агресії. Тільки мʼякий лавандовий шум.</p>
+        </div>
+      </div>
+
+      <div class="cute-tip">
+        <span>✧</span>
+        <p data-i18n="right.tip">Не сумуй, ти промінчик світла. Код теж вийде.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Нижній мініплеєр -->
+  <footer class="bottom-player panel reference-player" id="bottomPlayerPanel">
+    <!-- Ліва частина: обкладинка, трек, артист і лайк -->
+    <div class="bottom-song">
+      <img id="bottomCover" data-open-right-player="true" src="assets/covers/cover1.jpg" alt="">
+      <div class="bottom-song-copy">
+        <h3 id="bottomTitle">ねむれない夜に</h3>
+        <p id="bottomArtist">yume</p>
+      </div>
+      <button id="bottomLikeBtn" class="player-heart-btn" data-i18n-title="buttons.like">♡</button>
+    </div>
+
+    <!-- Центр: керування + доріжка з сердечком -->
+    <div class="bottom-main spotify-like-player">
+      <div class="mini-controls">
+        <button id="bottomShuffleBtn" class="player-icon-btn" data-i18n-title="buttons.shuffle">⤨</button>
+        <button id="bottomPrevBtn" class="player-icon-btn" data-i18n-title="buttons.prev">‹</button>
+        <button id="bottomPlayBtn" class="mini-play" data-i18n-title="buttons.play">▶</button>
+        <button id="bottomNextBtn" class="player-icon-btn" data-i18n-title="buttons.next">›</button>
+        <button id="bottomRepeatBtn" class="player-icon-btn" data-i18n-title="buttons.repeat">↻</button>
+      </div>
+
+      <div class="bottom-progress-row">
+        <span id="bottomCurrentTime" class="bottom-time">0:00</span>
+        <input id="bottomProgress" class="pro-range heart-main-range progress-range" type="range" min="0" max="100" value="0">
+        <span id="bottomDurationTime" class="bottom-time">0:00</span>
+      </div>
+    </div>
+
+    <!-- Права частина: гучність і екран -->
+    <div class="player-extra-actions">
+      <div class="volume-control">
+        <button class="extra-btn" id="muteBtn" data-i18n-title="player.volume">♬</button>
+        <input id="volumeInput" class="pro-range volume-range" type="range" min="0" max="100" value="70">
+      </div>
+
+      <button class="extra-btn" id="fullScreenBtn" data-i18n-title="player.fullscreen">⛶</button>
+    </div>
+
+    <button class="dock-close-btn" id="closeBottomPlayerBtn" type="button" data-i18n-title="player.close">✕</button>
+  </footer>
+
+  <!-- Кнопки повернення закритих плеєрів -->
+  <div class="players-restore" id="playersRestore" hidden>
+    <button type="button" data-restore-player="bottom" data-i18n="player.restoreBottom">Нижній плеєр</button>
+  </div>
+
+  <!-- Модальне вікно створення плейлиста -->
+  <div class="modal-backdrop" id="playlistModal" aria-hidden="true">
+    <div class="modal-card panel" role="dialog" aria-modal="true" aria-labelledby="playlistModalTitle">
+      <div class="modal-head">
+        <div>
+          <span class="pill ghost" data-i18n="modal.pill">новий плейлист</span>
+          <h2 id="playlistModalTitle" data-i18n="modal.title">Створити плейлист</h2>
+          <p data-i18n="modal.desc">Назви свій вайб і вибери настрій.</p>
+        </div>
+        <button class="circle-btn" id="closePlaylistModal" type="button" data-i18n-title="modal.close">✕</button>
+      </div>
+
+      <label class="form-field">
+        <span data-i18n="modal.nameLabel">Назва</span>
+        <input id="playlistNameInput" type="text" maxlength="32" data-i18n-placeholder="modal.namePlaceholder" />
+      </label>
+
+      <!-- Кастомний вибір настрою без стандартного білого select-меню -->
+      <div class="form-field mood-picker-field">
+        <span data-i18n="modal.moodLabel">Настрій</span>
+
+        <input id="playlistMoodSelect" type="hidden" value="all" />
+
+        <div class="modal-mood-picker" id="playlistMoodPicker" role="listbox">
+          <button class="modal-mood-option active" type="button" data-playlist-mood="all">
+            <span>✦</span>
+            <b data-i18n="mood.all.title">Для тебе</b>
+            <small data-i18n="mood.all.desc">усе мʼяке</small>
+          </button>
+
+          <button class="modal-mood-option" type="button" data-playlist-mood="new">
+            <span>🎧</span>
+            <b data-i18n="mood.new.title">Нові релізи</b>
+            <small data-i18n="mood.new.desc">свіжий вайб</small>
+          </button>
+
+          <button class="modal-mood-option" type="button" data-playlist-mood="alt">
+            <span>♡</span>
+            <b data-i18n="mood.alt.title">Альт вайб</b>
+            <small data-i18n="mood.alt.desc">ніжно і дивно</small>
+          </button>
+
+          <button class="modal-mood-option" type="button" data-playlist-mood="sleep">
+            <span>☁</span>
+            <b data-i18n="mood.sleep.title">Чіл і сон</b>
+            <small data-i18n="mood.sleep.desc">тихіше, мʼякше</small>
+          </button>
+
+          <button class="modal-mood-option" type="button" data-playlist-mood="night">
+            <span>☾</span>
+            <b data-i18n="playlist.night.desc">нічний вайб</b>
+            <small data-i18n="playlist.night.title">夜のメロディー</small>
+          </button>
+        </div>
+      </div>
+
+      <label class="form-field">
+        <span data-i18n="modal.noteLabel">Опис</span>
+        <textarea id="playlistDescriptionInput" rows="3" maxlength="90" data-i18n-placeholder="modal.notePlaceholder"></textarea>
+      </label>
+
+      <div class="modal-preview">
+        <img src="assets/covers/playlist1.jpg" alt="">
+        <div>
+          <b data-i18n="modal.previewTitle">Маленький куточок музики</b>
+          <p data-i18n="modal.previewDesc">Плейлист збережеться в браузері.</p>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="soft-action" id="cancelPlaylistModal" type="button" data-i18n="modal.cancel">Скасувати</button>
+        <button class="primary-btn" id="createPlaylistSubmitBtn" type="button" data-i18n="modal.create">Створити</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Випадаюче меню дій для конкретного треку -->
+  <div class="track-menu panel" id="trackMenu" hidden></div>
+
+  <!-- Модальне вікно редагування профілю -->
+  <div class="modal-backdrop" id="profileModal" aria-hidden="true">
+    <div class="modal-card panel profile-edit-modal" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle">
+      <div class="modal-head">
+        <div>
+          <span class="pill ghost" data-i18n="profile.editPill">профіль</span>
+          <h2 id="profileModalTitle" data-i18n="profile.editTitle">Редагувати профіль</h2>
+          <p data-i18n="profile.editDesc">Зміни ім’я, опис і маленький аватар.</p>
+        </div>
+        <button class="circle-btn" id="closeProfileModal" type="button" data-i18n-title="modal.close">✕</button>
+      </div>
+
+      <div class="profile-edit-preview">
+        <div class="profile-edit-avatar" id="profileEditAvatarPreview">猫</div>
+        <div>
+          <b id="profileEditNamePreview">Денис</b>
+          <small id="profileEditBioPreview">Мʼякий простір для музики.</small>
+        </div>
+      </div>
+
+      <!-- Завантаження власних фото профілю -->
+      <div class="profile-upload-grid">
+        <div class="profile-upload-card">
+          <span data-i18n="profile.avatarPhoto">Фото аватара</span>
+          <p data-i18n="profile.avatarPhotoDesc">Можна залишити емодзі або завантажити свою картинку.</p>
+          <div class="profile-upload-actions">
+            <button class="soft-action" id="uploadAvatarBtn" type="button" data-i18n="profile.uploadAvatar">Завантажити</button>
+            <button class="soft-action" id="removeAvatarImageBtn" type="button" data-i18n="profile.removePhoto">Прибрати</button>
+          </div>
+          <input id="profileAvatarFileInput" type="file" accept="image/*" hidden>
+        </div>
+
+        <div class="profile-upload-card">
+          <span data-i18n="profile.bannerPhoto">Обкладинка</span>
+          <p data-i18n="profile.bannerPhotoDesc">Власний банер зробить профіль унікальним.</p>
+          <div class="profile-upload-actions">
+            <button class="soft-action" id="uploadBannerBtn" type="button" data-i18n="profile.uploadBanner">Завантажити</button>
+            <button class="soft-action" id="removeBannerImageBtn" type="button" data-i18n="profile.removePhoto">Прибрати</button>
+          </div>
+          <input id="profileBannerFileInput" type="file" accept="image/*" hidden>
+        </div>
+      </div>
+
+      <label class="form-field">
+        <span data-i18n="profile.nameLabel">Ім’я</span>
+        <input id="profileNameInput" type="text" maxlength="26" data-i18n-placeholder="profile.namePlaceholder" />
+      </label>
+
+      <div class="profile-form-grid">
+        <label class="form-field">
+          <span data-i18n="profile.handleLabel">Нік</span>
+          <input id="profileHandleInput" type="text" maxlength="24" data-i18n-placeholder="profile.handlePlaceholder" />
+        </label>
+
+        <label class="form-field">
+          <span data-i18n="profile.statusLabel">Статус</span>
+          <input id="profileStatusInput" type="text" maxlength="32" data-i18n-placeholder="profile.statusPlaceholder" />
+        </label>
+      </div>
+
+      <div class="profile-form-grid">
+        <label class="form-field">
+          <span data-i18n="profile.locationLabel">Місто / країна</span>
+          <input id="profileLocationInput" type="text" maxlength="42" data-i18n-placeholder="profile.locationPlaceholder" />
+        </label>
+
+        <label class="form-field">
+          <span data-i18n="profile.websiteLabel">Посилання</span>
+          <input id="profileWebsiteInput" type="text" maxlength="80" data-i18n-placeholder="profile.websitePlaceholder" />
+        </label>
+      </div>
+
+      <label class="form-field">
+        <span data-i18n="profile.avatarLabel">Аватар-символ</span>
+        <input id="profileAvatarInput" type="text" maxlength="2" data-i18n-placeholder="profile.avatarPlaceholder" />
+      </label>
+
+      <!-- Швидкий вибір аватара -->
+      <div class="profile-preset-block">
+        <span data-i18n="profile.avatarPresets">Швидкий аватар</span>
+        <div class="profile-avatar-presets" id="profileAvatarPresets">
+          <button type="button" data-avatar-preset="猫">猫</button>
+          <button type="button" data-avatar-preset="♡">♡</button>
+          <button type="button" data-avatar-preset="☾">☾</button>
+          <button type="button" data-avatar-preset="✦">✦</button>
+          <button type="button" data-avatar-preset="🎧">🎧</button>
+          <button type="button" data-avatar-preset="🐰">🐰</button>
+        </div>
+      </div>
+
+      <label class="form-field">
+        <span data-i18n="profile.bioLabel">Короткий опис</span>
+        <textarea id="profileBioInput" rows="3" maxlength="140" data-i18n-placeholder="profile.bioPlaceholder"></textarea>
+      </label>
+
+      <label class="form-field">
+        <span data-i18n="profile.aboutLabel">Про себе</span>
+        <textarea id="profileAboutInput" rows="4" maxlength="420" data-i18n-placeholder="profile.aboutPlaceholder"></textarea>
+      </label>
+
+      <!-- Улюблений вайб профілю -->
+      <div class="profile-preset-block">
+        <span data-i18n="profile.vibeLabel">Улюблений вайб</span>
+        <input id="profileVibeInput" type="hidden" value="soft" />
+
+        <div class="profile-vibe-presets" id="profileVibePresets">
+          <button class="active" type="button" data-profile-vibe="soft">
+            <b>✦</b>
+            <span data-i18n="profile.vibeSoft">soft</span>
+          </button>
+          <button type="button" data-profile-vibe="alt">
+            <b>♡</b>
+            <span data-i18n="profile.vibeAlt">alt</span>
+          </button>
+          <button type="button" data-profile-vibe="night">
+            <b>☾</b>
+            <span data-i18n="profile.vibeNight">night</span>
+          </button>
+          <button type="button" data-profile-vibe="sleep">
+            <b>☁</b>
+            <span data-i18n="profile.vibeSleep">sleep</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Акцентний колір профілю -->
+      <div class="profile-preset-block">
+        <span data-i18n="profile.accentLabel">Акцент профілю</span>
+        <input id="profileAccentInput" type="hidden" value="lavender" />
+
+        <div class="profile-accent-presets" id="profileAccentPresets">
+          <button class="active" type="button" data-profile-accent="lavender"><span></span><b>lavender</b></button>
+          <button type="button" data-profile-accent="rose"><span></span><b>rose</b></button>
+          <button type="button" data-profile-accent="blue"><span></span><b>blue</b></button>
+          <button type="button" data-profile-accent="mint"><span></span><b>mint</b></button>
+        </div>
+      </div>
+
+      <!-- Обкладинка профілю -->
+      <div class="profile-preset-block">
+        <span data-i18n="profile.bannerLabel">Обкладинка профілю</span>
+        <input id="profileBannerInput" type="hidden" value="hero" />
+
+        <div class="profile-banner-presets" id="profileBannerPresets">
+          <button class="active" type="button" data-profile-banner="hero">
+            <img src="assets/covers/hero.jpg" alt="">
+          </button>
+          <button type="button" data-profile-banner="nowplaying">
+            <img src="assets/covers/nowplaying.jpg" alt="">
+          </button>
+          <button type="button" data-profile-banner="playlist1">
+            <img src="assets/covers/playlist1.jpg" alt="">
+          </button>
+          <button type="button" data-profile-banner="playlist2">
+            <img src="assets/covers/playlist2.jpg" alt="">
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="soft-action" id="cancelProfileModal" type="button" data-i18n="modal.cancel">Скасувати</button>
+        <button class="primary-btn" id="saveProfileBtn" type="button" data-i18n="profile.save">Зберегти</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio" preload="metadata"></audio>
+
+  <div class="toast" id="toast" data-i18n="toast.ready">Готово</div>
+
+  <script src="app.js?v=47"></script>
+  <script src="auth-v47.js?v=47"></script>
+  <script src="social-auth-v57.js?v=57"></script>
+  <script src="server-playlists-v58.js?v=58"></script>
+  <script src="admin-tools-v59.js?v=59"></script>
+  <script src="product-polish-v59.js?v=59"></script>
+  <script src="queue-history-v60.js?v=60"></script>
+  <script src="logo-home-v61.js?v=61"></script>
+  <script src="release-pack-v62.js?v=62"></script>
+  <script src="stable-pack-v63.js?v=63"></script>
+
+  <!-- Екран входу / реєстрації -->
+
+  <script src="universal-search-v54.js?v=54"></script>
+  <script src="server-tracks-v48.js?v=48-admin"></script>
+  <script src="admin-v48.js?v=48-admin"></script>
+</body>
+</html>

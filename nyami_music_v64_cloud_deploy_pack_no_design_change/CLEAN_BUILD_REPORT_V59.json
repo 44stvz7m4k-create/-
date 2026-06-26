@@ -1,0 +1,51 @@
+{
+  "build": "v59-deploy-ready",
+  "design_statement": {
+    "style_css_changed_in_this_build": false,
+    "main_layout_rewritten": false,
+    "new_layers_only": [
+      "admin-tools-v59.js/css",
+      "product-polish-v59.js/css",
+      "server-playlists-v58.js/css",
+      "social-auth-v57.js/css",
+      "universal-search-v54.js/css"
+    ]
+  },
+  "checks": {
+    "python_compile_server": true,
+    "node_check_js": [
+      "app.js",
+      "auth-v47.js",
+      "admin-v48.js",
+      "server-tracks-v48.js",
+      "universal-search-v54.js",
+      "social-auth-v57.js",
+      "server-playlists-v58.js",
+      "admin-tools-v59.js",
+      "product-polish-v59.js"
+    ],
+    "node_check_service_worker": true
+  },
+  "deploy_files": [
+    ".env.example",
+    ".gitignore",
+    "requirements.txt",
+    "Procfile",
+    "runtime.txt",
+    "README.md",
+    "DEPLOY_README_V59.txt",
+    "START_DEV_WINDOWS.bat",
+    "START_PROD_WINDOWS.bat"
+  ],
+  "css_files": [
+    "admin-tools-v59.css",
+    "admin-v48.css",
+    "auth-v47.css",
+    "product-polish-v59.css",
+    "server-playlists-v58.css",
+    "server-tracks-v48.css",
+    "social-auth-v57.css",
+    "style.css",
+    "universal-search-v54.css"
+  ]
+}

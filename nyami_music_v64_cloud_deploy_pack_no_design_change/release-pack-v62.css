@@ -1,0 +1,125 @@
+
+/* v62 release pack layer.
+   Main style.css is not edited. */
+
+.nyami-splash-v62,
+.nyami-onboarding-v62 {
+  position: fixed;
+  inset: 0;
+  z-index: 2147482500;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(22, 18, 35, .32);
+  backdrop-filter: blur(18px);
+}
+
+.nyami-splash-v62.is-hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .32s ease;
+}
+
+.nyami-splash-card-v62,
+.nyami-onboarding-card-v62 {
+  width: min(420px, 100%);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 28px;
+}
+
+.nyami-splash-card-v62 img,
+.nyami-onboarding-card-v62 img {
+  width: 88px;
+  height: 88px;
+  border-radius: 28px;
+}
+
+.nyami-splash-card-v62 b {
+  font-size: 26px;
+  letter-spacing: -1px;
+}
+
+.nyami-onboarding-card-v62 h2,
+.nyami-onboarding-card-v62 p {
+  margin: 0;
+}
+
+.nyami-onboarding-dots-v62 {
+  display: inline-flex;
+  gap: 7px;
+  margin-top: 6px;
+}
+
+.nyami-onboarding-dots-v62 i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: .22;
+}
+
+.nyami-onboarding-dots-v62 i.is-active {
+  opacity: .78;
+}
+
+.nyami-onboarding-actions-v62 {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.release-public-playlist-v62,
+.artist-page-v62 {
+  margin-bottom: 18px;
+}
+
+.lyrics-block-v62 {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.lyrics-block-v62 pre {
+  white-space: pre-wrap;
+  max-height: 280px;
+  overflow: auto;
+  margin: 0;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.42);
+  font: inherit;
+  line-height: 1.5;
+}
+
+body.night .lyrics-block-v62 pre {
+  background: rgba(255,255,255,.07);
+}
+
+.artist-clickable-v62 {
+  cursor: pointer;
+}
+
+.artist-clickable-v62:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 760px) {
+  .nyami-splash-card-v62,
+  .nyami-onboarding-card-v62 {
+    padding: 22px;
+  }
+
+  .nyami-splash-card-v62 img,
+  .nyami-onboarding-card-v62 img {
+    width: 74px;
+    height: 74px;
+  }
+
+  .lyrics-block-v62 pre {
+    max-height: 220px;
+  }
+}
